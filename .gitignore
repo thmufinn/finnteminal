@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist-server/
+
+.env
+.env.*
+
+.DS_Store
+*.log
+
+tsconfig.tsbuildinfo
+
+server/shell/.zsh_history
+server/shell/.zsh_sessions/
