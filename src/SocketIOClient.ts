@@ -8,8 +8,17 @@ class SocketIOClient<
 
   constructor(namespace = '') {
     const host = window.location.hostname || '127.0.0.1';
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token') ?? window.localStorage.getItem('terminalToken') ?? undefined;
+    const serverUrl = import.meta.env.VITE_TERMINAL_SERVER_URL
+      ?? (import.meta.env.PROD ? window.location.origin : `http://${host}:8081`);
 
-    this.client = io(`http://${host}:8081${namespace}`, {
+    if (token) {
+      window.localStorage.setItem('terminalToken', token);
+    }
+
+    this.client = io(`${serverUrl}${namespace}`, {
+      auth: { token },
       autoConnect: false,
       reconnectionAttempts: 5,
     });

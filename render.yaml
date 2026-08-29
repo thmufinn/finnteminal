@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: finnteminal
+    runtime: node
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TERMINAL_TOKEN
+        generateValue: true
